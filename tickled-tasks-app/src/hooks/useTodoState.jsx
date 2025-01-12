@@ -1,14 +1,14 @@
 import { useState } from "react";
 
-export default initialValue => {
+export default (initialValue) => {
   const [todos, setTodos] = useState(initialValue);
 
   return [
     todos,
-    todoText => {
+    (todoText) => {
       setTodos([...todos, todoText]);
     },
-    todoIndex => {
+    (todoIndex) => {
       const newTodos = todos.filter((_, index) => index !== todoIndex);
       setTodos(newTodos);
     },

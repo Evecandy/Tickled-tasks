@@ -1,40 +1,33 @@
 import React from "react";
-import ReactDOM from 'react-dom/client';
-import TodoForm from "./TodoForm";
-import TodoList from "./TodoList";
-import Typography from '@mui/material/Typography';
-import useTodoState from './useTodoState';
+import ReactDOM from "react-dom/client";
+import TodoForm from "./components/TodoForm";
+import TodoList from "./components/TodoList";
+import Typography from "@mui/material/Typography";
+// import useTodoState from "./useTodoState";
 
-
+import { Provider } from "react-redux";
+import store from "./store/store";
 
 const App = () => {
-    const [todos, addTodo, deleteTodo] = useTodoState([]);
+  // const [todos, addTodo, deleteTodo] = useTodoState([]);
   return (
     <div className="App">
       <Typography component="h1" variant="h2">
         My Tickled Tasks
       </Typography>
-      <TodoForm
-       saveTodo={(todoText) =>{
-        const trimmedText = todoText.trim();
-
-        if (trimmedText.length > 0){
-            addTodo(trimmedText);
-        }
-       }} />
-        <TodoList todos={todos} deleteTodo={deleteTodo}/>
+      <TodoForm />
+      <TodoList />
     </div>
   );
 };
 
-
-
-const rootElement = document.getElementById('root');  
-const root = ReactDOM.createRoot(rootElement); 
+const rootElement = document.getElementById("root");
+const root = ReactDOM.createRoot(rootElement);
 
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
-
